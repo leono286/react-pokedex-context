@@ -7,7 +7,8 @@
 }
 
 .imageWraper {
-  margin: 50px 0 5px;
+  margin: 35px 0 30px;
+  max-height: 96px;
 }
 
 .pokemonData {
@@ -20,6 +21,10 @@
     text-transform: capitalize;
     color: #fff;
     font-size: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 0 13px;
   }
   .typesWrapper {
     background-color: rgba(255,255,255,0.05);

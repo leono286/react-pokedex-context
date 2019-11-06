@@ -6,7 +6,7 @@ import styles from './pokemon-card.module.scss'
 
 const renderTypes = (types) => {
   const typesName = types.map(typeItem => typeItem.type.name);
-  return typesName.map(typeName => <span className={styles.type}>{typeName}</span>);
+  return typesName.map((typeName, index) => <span className={styles.type} key={index}>{typeName}</span>);
 }
 
 const PokemonCard = (props) => {

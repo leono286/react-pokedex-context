@@ -1,72 +1,73 @@
-.detailsCard {
-  outline: 0;
-  max-height: 80vh;
-  max-width: 80vw;
-  min-width: 280px;
-  border-radius: 4px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  font-family: 'Share Tech Mono', monospace;
-  
-  @media screen and (min-width: 768px){
-    max-width: 60vw;
-  }
-
-  &:focus {
+  .detailsCard {
     outline: 0;
-  }
+    max-height: 80vh;
+    max-width: 80vw;
+    min-width: 280px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    font-family: 'Share Tech Mono', monospace;
+    
+    @media screen and (min-width: 768px){
+      max-width: 60vw;
+    }
   
-  * {
-    color: #fff;
+    &:focus {
+      outline: 0;
+    }
+    
+    * {
+      color: #fff;
+    }
+  
+    .imageWraper {
+      margin: 20px 0 10px;
+    }
+    
   }
 
-  .imageWraper {
-    margin: 20px 0 10px;
+.pokemonData {
+  width: 100%;
+  margin: 0%;
+
+  > * {
+    padding: 0 20px;
   }
-  
-}
-    .pokemonData {
-      width: 100%;
-      margin: 0%;
-  
-      > * {
-        padding: 0 20px;
+
+  .pokemonName {
+    margin: 10px 0 8px;
+    text-transform: capitalize;
+    font-size: 28px;
+  }
+  .detailsWrapper {
+    background-color: rgba(255,255,255,0.05);
+    font-size: 18px;
+
+    .detailsItemBox {
+      padding: 8px;
+
+      &:not(:last-child) {
+        border-bottom: 1px solid #FFF; 
       }
-  
-      .pokemonName {
-        margin: 10px 0 8px;
-        text-transform: capitalize;
-        font-size: 28px;
-      }
-      .detailsWrapper {
-        background-color: rgba(255,255,255,0.05);
-        font-size: 18px;
-  
-        .detailsItemBox {
-          padding: 8px;
-  
-          &:not(:last-child) {
-            border-bottom: 1px solid #FFF; 
-          }
-  
-          .stats {
-            padding: 0;
-            margin: 5px 0 5px 5px;
-            li {
-              display: flex;
-              margin-top: 4px;
-              span {
-                flex-grow: 0;
-                &.dots {
-                  flex-grow: 1;
-                  border-bottom: 2px dotted #fff;
-                  padding: 0 2px;
-                }
-              }
+
+      .stats {
+        padding: 0;
+        margin: 5px 0 5px 5px;
+        li {
+          display: flex;
+          margin-top: 4px;
+          span {
+            flex-grow: 0;
+            &.dots {
+              flex-grow: 1;
+              border-bottom: 2px dotted #fff;
+              padding: 0 2px;
             }
           }
         }
       }
     }
+  }
+}

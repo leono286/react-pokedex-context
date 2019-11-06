@@ -9,6 +9,7 @@ import Card from '@material-ui/core/Card';
 
 import PokemonsContext from "../../context/pokemon.context";
 import PokemonCard from '../pokemon-card/pokemon-card';
+import PokemonDetailsCard from '../pokemon-details-card/pokemon-details-card';
 
 import styles from './pokemon-list.module.scss'
 
@@ -28,6 +29,8 @@ const PokemonList = () => {
 
   const [open, setOpen] = useState(false);
 
+  const [callingApi, setcallingApi] = useState(false);
+
 
 
   const getPokemonDetail = async (pokemonUrl) => {
@@ -41,11 +44,8 @@ const PokemonList = () => {
 
   const handleScroll = (event) => {
     const bottomMargin = event.srcElement.documentElement.offsetHeight - 90;
-    console.log(window.pageYOffset + window.innerHeight >= bottomMargin);
-    if (window.pageYOffset + window.innerHeight >= bottomMargin) {
-      const calls = apiCallsCounter + 1;
-      setapiCallsCounter(calls);
-      console.log(apiCallsCounter);
+    if (window.pageYOffset + window.innerHeight >= bottomMargin && !callingApi) {
+      setcallingApi(true);
     }
   }
 
@@ -67,10 +67,7 @@ const PokemonList = () => {
     }
   }
 
-  const renderTypes = (types) => {
-    const typesName = types.map(typeItem => typeItem.type.name);
-    return typesName.map(typeName => <span className={styles.type}>{typeName}</span>);
-  }
+
 
   const getPokemonsChunk = async (offset) => {
     const url = `${apiUrl}${apiCallsCounter * 50}`;
@@ -84,17 +81,23 @@ const PokemonList = () => {
     });
     setPokemons([...pokemons, ...pokemonsList]);
     setPokemonsToShow(pokemons);
+    setcallingApi(false);
   };
 
 
   useEffect(
     () => {
-      console.log('epaaaaa');
-      console.log(apiCallsCounter);
-      console.log('epaaaaa');
       getPokemonsChunk(apiCallsCounter);
     }, [apiCallsCounter]
   );
+
+  useEffect(
+    () => {
+      if (callingApi) {
+        setapiCallsCounter((apiCallsCounter) => apiCallsCounter + 1);
+      }
+    }, [callingApi]
+  )
 
   useEffect(
     () => {
@@ -130,8 +133,8 @@ const PokemonList = () => {
       />
       <div className={styles.pokemonsWrapper}>
         {pokemonsToShow && pokemonsToShow.map(pokemon => (
-          <div className={styles.pokemonCardBox} onClick={() => { handleOpen(pokemon) }}>
-            <PokemonCard {...pokemon} key={pokemon.id} />
+          <div className={styles.pokemonCardBox} onClick={() => { handleOpen(pokemon) }} key={pokemon.id}>
+            <PokemonCard {...pokemon} />
           </div>
         ))}
       </div>
@@ -151,7 +154,8 @@ const PokemonList = () => {
       >
         <Fade in={open}>
           <div>
-            <Card
+          <PokemonDetailsCard {...currentPokemon} />
+            {/* <Card
               square={true}
               elevation={5}
               className={styles.detailsCard}
@@ -196,7 +200,7 @@ const PokemonList = () => {
                   </div>
                 </div>
               </div>
-            </Card>
+            </Card> */}
           </div>
         </Fade>
       </Modal>
